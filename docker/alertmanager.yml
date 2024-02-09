@@ -1,0 +1,14 @@
+route:
+  receiver: 'slack-notifications'
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+
+receivers:
+  - name: 'slack-notifications'
+    slack_configs:
+      - send_resolved: true
+	username: 'serin'
+	channel: '#prometheus-test'
+	api-url: 'https://hooks.slack.com/services/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'
+	text: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
